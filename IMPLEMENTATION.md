@@ -17,6 +17,8 @@ This project is a test task implementation that replicates the core user interfa
 
 **Live Deployment:** [https://out-of-the-box-fe-test.vercel.app/](https://out-of-the-box-fe-test.vercel.app/)
 
+**Video Walkthrough:** [Loom Video - Project Demonstration & Technical Walkthrough](https://www.loom.com/share/5615a703d4fc49fca48eb5cfd52dba71)
+
 ### Core Objective
 
 The task required reproducing the essential visual and interactive elements of the reference website without implementing the 3D logic. The focus was on:
