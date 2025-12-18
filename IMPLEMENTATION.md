@@ -15,6 +15,8 @@
 
 This project is a test task implementation that replicates the core user interface and scroll-driven experience of the [Hall of Zero Limits](https://wakanda-forever-master.dogstudio-dev.co/zerolimits) cinematic website. The original site features complex 3D WebGL animations, which this implementation replaces with a combination of AI-generated video backgrounds, parallax effects, and 2D image layers while maintaining the immersive, cinematic atmosphere.
 
+**Live Deployment:** [https://out-of-the-box-fe-test.vercel.app/](https://out-of-the-box-fe-test.vercel.app/)
+
 ### Core Objective
 
 The task required reproducing the essential visual and interactive elements of the reference website without implementing the 3D logic. The focus was on:
@@ -95,6 +97,53 @@ The application uses a **section-based state management** approach:
   3. **FFmpeg Conversion:** Converted video files into small, optimized GIFs using FFmpeg, making them readable by Claude AI
   4. **Claude Opus Planning:** Leveraged Claude AI's Opus model (known for its planning capabilities) with the converted GIFs and Gemini descriptions to create detailed implementation plans
 - **Result:** Comprehensive planning documentation that captured both visual details and technical requirements, enabling structured implementation
+
+### Challenge 6: Image Loading Performance
+
+**Limitation:** On initial page load, images (particularly the garden background and door visuals) may load slowly, creating visual gaps or layout shifts before assets are fully loaded.
+
+**Current Solution:**
+- **Browser Caching:** Once images are loaded, browser caching ensures subsequent visits load instantly without visual gaps
+- **Next.js Image Optimization:** Using Next.js `Image` component with `priority` flag for above-the-fold content
+
+**Future Optimization (with more time):**
+- **WebP Format:** Convert all images to WebP format for significantly smaller file sizes while maintaining quality
+- **Responsive Image Sizes:** Implement `srcset` with multiple image sizes for different viewport widths
+- **Progressive Loading:** Add blur placeholders or skeleton screens during image load
+- **CDN Optimization:** Serve optimized images through a CDN with automatic format conversion
+- **Result:** Faster initial load times and better perceived performance
+
+### Challenge 7: Mobile Responsiveness
+
+**Limitation:** The garden background image and panoramic effects were designed primarily for desktop viewports. While the site remains functional and responsive on mobile devices, the visual experience could be further optimized for smaller screens.
+
+**Current State:**
+- **Responsive Layout:** The site adapts to mobile viewports with functional layouts
+- **Touch Interactions:** Scroll and touch gestures work correctly on mobile devices
+- **Visual Adaptation:** Some visual elements scale appropriately, but background images maintain desktop aspect ratios
+
+**Future Enhancement (with more time):**
+- **Mobile-Optimized Backgrounds:** Create separate, cropped versions of the garden background optimized for mobile aspect ratios
+- **Responsive Image Sourcing:** Use `srcset` and `sizes` attributes to serve different images based on viewport size
+- **Mobile-Specific Parallax:** Adjust parallax strength and effects for touch devices
+- **Performance Tuning:** Reduce particle count and animation complexity on mobile for better performance
+- **Result:** A more tailored mobile experience that maintains the cinematic feel while being optimized for smaller screens
+
+### Challenge 8: Feature Completeness
+
+**Limitation:** Due to time constraints of a test task, some visual elements that would enhance the immersive experience were not fully implemented.
+
+**Current State:**
+- **Quote Cards:** The `QuoteCard` component exists and is partially implemented in `Panorama.tsx`, but is currently commented out
+- **Origin Stories:** The `OriginStories` component is built but not integrated into the main navigation flow
+- **Visual Polish:** Core features are polished, but additional decorative elements could enhance the atmosphere
+
+**Future Enhancement (with more time):**
+- **Quote Cards Integration:** Uncomment and fully integrate the quote cards positioned around the central hall panorama
+- **Additional Visual Elements:** Add more atmospheric elements like floating particles, light rays, and decorative overlays
+- **Section Completion:** Integrate the Origin Stories section into the main flow
+- **Enhanced Interactions:** Add hover effects, click interactions, and micro-animations to existing elements
+- **Result:** A more complete experience that captures additional nuances of the original site's atmosphere
 
 ## AI Tool Usage
 
@@ -206,6 +255,16 @@ This test task provided valuable experience in:
 - Using AI tools as part of the development workflow
 - Creating immersive experiences with 2D techniques
 - Balancing feature completeness with time constraints
+- Working with performance trade-offs and optimization opportunities
 
-The implementation successfully captures the essence of the original site's cinematic atmosphere while demonstrating adaptability and problem-solving skills in the face of technical limitations.
+### Known Limitations & Future Improvements
+
+While the current implementation successfully captures the core experience, there are several areas that would benefit from additional development time:
+
+1. **Performance Optimization:** Image loading could be improved with WebP formats and responsive image sizing
+2. **Mobile Experience:** Background images and visual effects could be further optimized for mobile viewports
+3. **Feature Completeness:** Additional visual elements like quote cards and enhanced interactions would strengthen the immersive atmosphere
+4. **Progressive Enhancement:** Better loading states and skeleton screens would improve perceived performance
+
+The implementation successfully captures the essence of the original site's cinematic atmosphere while demonstrating adaptability and problem-solving skills in the face of technical limitations. The identified areas for improvement show awareness of production-ready considerations and a commitment to delivering polished user experiences.
 
