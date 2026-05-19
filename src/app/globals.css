@@ -57,3 +57,32 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* KeepcodeIn animations */
+@keyframes cloud {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes kci-first {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+}
+
+@keyframes kci-round {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes kci-zoom {
+  0%, 100% { transform: scale(0.7); }
+  50% { transform: scale(1.2); }
+}
+
+.animate-cloud { animation: cloud 4s ease-in-out infinite; }
+.animate-kci-first { animation: kci-first 5s ease-in-out infinite; }
+.animate-kci-round { animation: kci-round 8s linear infinite; }
+.animate-kci-zoom { animation: kci-zoom 8s ease-in-out infinite; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

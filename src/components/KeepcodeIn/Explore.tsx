@@ -1,77 +1,65 @@
 'use client'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import Cards from './Cards'
 
-const filters = ['All', 'Fashion', 'Music', 'Video', 'Game', 'Real Estate']
+const BASE = 'https://raw.githubusercontent.com/alinadrozdyk2/company_landingpage/main/src/assets/CGI'
 
-const cases = [
-  { title: 'Health Care', category: 'Video', color: 'from-[#59D3AA] to-[#3F5EFB]' },
-  { title: 'Robotics', category: 'Game', color: 'from-[#FC466B] to-[#6318F1]' },
-  { title: 'Casino Game', category: 'Game', color: 'from-[#6318F1] to-[#3F5EFB]' },
-  { title: 'Construction', category: 'Real Estate', color: 'from-[#3F5EFB] to-[#59D3AA]' },
-  { title: 'Influencer', category: 'Fashion', color: 'from-[#FC466B] to-[#3F5EFB]' },
-  { title: 'NFT Platform', category: 'Music', color: 'from-[#6318F1] to-[#FC466B]' },
-  { title: 'Survey App', category: 'Video', color: 'from-[#59D3AA] to-[#6318F1]' },
-  { title: 'Sports', category: 'Game', color: 'from-[#3F5EFB] to-[#FC466B]' },
-  { title: 'Shoe Store', category: 'Fashion', color: 'from-[#FC466B] to-[#59D3AA]' },
-  { title: 'Portfolio', category: 'Music', color: 'from-[#6318F1] to-[#59D3AA]' },
+const explorecards = [
+  { heading: 'Health Care',   img: `${BASE}/health.png` },
+  { heading: 'Robotics',      img: `${BASE}/robotics.png` },
+  { heading: 'Casino Gmae',   img: `${BASE}/casino.png` },
+  { heading: 'Construction',  img: `${BASE}/contruction.png` },
+  { heading: 'Influencer',    img: `${BASE}/influencer.png` },
+  { heading: 'NFT Platform',  img: `${BASE}/NFT.png` },
+  { heading: 'Survey',        img: `${BASE}/survey.png` },
+  { heading: 'Sports',        img: `${BASE}/sports.png` },
+  { heading: 'Shoes',         img: `${BASE}/shoes.png` },
+  { heading: 'Portfolio',     img: `${BASE}/portfolio.png` },
 ]
 
 export default function Explore() {
-  const [active, setActive] = useState('All')
-
-  const filtered = active === 'All' ? cases : cases.filter(c => c.category === active)
-
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden" style={{ background: '#0d0924' }}>
-      <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-80 h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ background: '#6318F1' }} />
+    <>
+      <div id="case-study" className="container mx-auto relative">
+        <div className="flex lg:justify-between justify-center flex-wrap gap-x-20 gap-y-5 items-center text-white px-4 lg:px-20 pt-20 lg:pt-44 mx-20">
+          <h1 className="text-3xl order-1 md:order-1 text-white font-semibold">Case Studies</h1>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10 gap-4">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Case Studies</h2>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="text-white text-sm font-semibold px-5 py-2 rounded-full self-start sm:self-auto"
-            style={{ background: 'linear-gradient(to right, #FC466B, #3F5EFB)' }}
-          >
-            Apply Now
-          </motion.button>
-        </div>
+          <div className="order-3 md:order-2">
+            <ul className="flex lg:gap-x-4 gap-x-2 items-center justify-center">
+              {['All', 'Fashion', 'Music', 'Video', 'Game', 'Real Estate'].map(f => (
+                <li key={f}
+                  className="cursor-pointer rounded-lg hover:bg-gradient-to-r hover:from-[#FC466B]/40 hover:to-[#3F5EFB]/40 py-1 px-2 hover:scale-125 duration-200">
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Filter tabs */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {filters.map(f => (
-            <button key={f} onClick={() => setActive(f)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
-              style={{
-                background: active === f ? 'linear-gradient(to right, #FC466B, #3F5EFB)' : 'transparent',
-                color: active === f ? 'white' : '#9ca3af',
-                border: active === f ? 'none' : '1px solid #ffffff20',
-              }}
-            >
-              {f}
+          <div className="order-2 md:order-3">
+            <button className="px-6 py-2 bg-[#6318F1] text-white font-bold rounded-full transition-transform transform-gpu hover:shadow-lg hover:bg-gradient-to-r hover:from-[#FC466B]/40 hover:to-[#3F5EFB]/40 hover:scale-105 duration-150">
+              Apply Now
             </button>
-          ))}
+          </div>
         </div>
 
-        <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {filtered.map((c, i) => (
-            <motion.div
-              key={c.title}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: i * 0.04 }}
-              whileHover={{ y: -4, scale: 1.03 }}
-              className={`bg-gradient-to-br ${c.color} rounded-2xl h-36 flex flex-col justify-end p-4 cursor-pointer`}
-            >
-              <span className="text-white text-xs font-medium opacity-70">{c.category}</span>
-              <span className="text-white font-bold text-sm mt-0.5">{c.title}</span>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Desktop grid */}
+        <div className="lg:block hidden">
+          <div className="absolute inset-0 translate-x-[10px] top-32 -z-10 bg-gradient-to-b w-80 rounded-full h-96 blur-3xl from-purple-600 opacity-30 via-purple-500 to-purple-400" />
+          <div className="flex flex-wrap gap-x-10 gap-y-10 mt-10 justify-center px-20">
+            {explorecards.map((explore, index) => (
+              <Cards key={index} img={explore.img} heading={explore.heading} />
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
+
+      {/* Mobile scroll */}
+      <div className="lg:hidden xs:flex my-5 overflow-x-scroll no-scrollbar hide-scroll-bar">
+        <div className="flex flex-nowrap gap-x-12 pt-5 px-8 py-10">
+          {explorecards.map((explore, index) => (
+            <Cards key={index} img={explore.img} heading={explore.heading} />
+          ))}
+        </div>
+      </div>
+    </>
   )
 }

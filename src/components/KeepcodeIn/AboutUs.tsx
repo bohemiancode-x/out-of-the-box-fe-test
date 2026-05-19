@@ -1,73 +1,81 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { useInView } from 'framer-motion'
+import CountUp from 'react-countup'
 
-function CountUp({ end, suffix = '' }: { end: number; suffix?: string }) {
-  const [val, setVal] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true })
-
-  useEffect(() => {
-    if (!inView) return
-    let start = 0
-    const step = end / 60
-    const id = setInterval(() => {
-      start += step
-      if (start >= end) { setVal(end); clearInterval(id) }
-      else setVal(Math.floor(start))
-    }, 20)
-    return () => clearInterval(id)
-  }, [inView, end])
-
-  return <span ref={ref}>{val.toLocaleString()}{suffix}</span>
-}
-
-const stats = [
-  { value: 1700, suffix: '+', label: 'Vetted IT Experts', sub: '20,000+ achievements' },
-  { value: 99, suffix: '%', label: 'Client Satisfaction', sub: '20,000+ Rating Users' },
-  { value: 3000, suffix: '+', label: 'Projects Delivered', sub: '12,000+ Completions' },
-]
+const ABOUT_IMG = 'https://raw.githubusercontent.com/alinadrozdyk2/company_landingpage/main/src/assets/aboutimg.png'
 
 export default function AboutUs() {
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden" style={{ background: '#050023' }}>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div id="about" className="container mx-auto">
+      <div className="my-44 lg:flex justify-center md:mr-20 px-2 sm:mx-20">
         {/* Left */}
-        <div>
-          <p className="text-sm font-semibold mb-2 bg-clip-text text-transparent"
-            style={{ backgroundImage: 'linear-gradient(to right, #FC466B, #3F5EFB)' }}>
-            About Us
-          </p>
-          <h2 className="text-3xl sm:text-4xl xl:text-5xl font-extrabold text-white leading-tight mb-6">
+        <div className="lg:min-w-[55%] flex flex-col gap-y-6 md:px-16">
+          <div className="inline-flex">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] text-transparent bg-clip-text">
+              About Us
+            </h1>
+          </div>
+          <h1 className="text-4xl font-bold text-white">
             Empowering Businesses From Cutting Edge Technology
-          </h2>
-          <p className="text-gray-400 leading-relaxed mb-8">
-            KeepcodeIn is a next-generation technology partner, connecting companies with elite IT talent and delivering
-            bespoke digital solutions. We bridge the gap between ambition and execution through innovation, expertise,
-            and an unwavering commitment to client success.
+          </h1>
+          <p className="text-white">
+            At Keepcodein, innovation is at the heart of everything we do.
+            We stay ahead of the curve by embracing the latest technologies, trends,
+            and methodologies, ensuring that our clients always have access to the most
+            advanced solutions available. We believe in building lasting partnerships with our
+            clients, working closely with them every step of the way to ensure their success.
           </p>
-          <button className="text-white font-semibold px-6 py-3 rounded-full text-sm"
-            style={{ background: 'linear-gradient(to right, #FC466B, #3F5EFB)' }}>
-            Learn More
-          </button>
+
+          <div className="flex justify-between my-4">
+            <div>
+              <div className="text-white flex flex-col gap-y-5">
+                <div className="text-4xl text-white font-bold">
+                  <CountUp start={0} end={1700} enableScrollSpy /> +
+                </div>
+                <div>
+                  <div>Vetted IT Experts</div>
+                  <div className="text-green-400">20,000+ acheiveenst</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="md:block hidden">
+              <div className="text-white flex flex-col gap-y-5">
+                <div className="text-4xl text-white font-bold">
+                  <CountUp start={0} end={99} enableScrollSpy /> %
+                </div>
+                <div>
+                  <div>Vetted IT Experts</div>
+                  <div className="text-green-400">20,000+ Rating Users</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="text-white flex flex-col gap-y-5">
+                <div className="text-4xl text-white font-bold">
+                  <CountUp start={0} end={3000} enableScrollSpy /> +
+                </div>
+                <div>
+                  <div>Vetted IT Experts</div>
+                  <div className="text-green-400">12,000+ Completions</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Right — stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {stats.map((s, i) => (
-            <div key={i}
-              className="rounded-2xl p-6 flex flex-col items-center text-center border border-white/10"
-              style={{ background: 'linear-gradient(135deg, #110D2E, #1e0347)' }}
-            >
-              <p className="text-3xl sm:text-4xl font-extrabold text-white mb-1">
-                <CountUp end={s.value} suffix={s.suffix} />
-              </p>
-              <p className="text-white text-sm font-semibold mb-1">{s.label}</p>
-              <p className="text-gray-500 text-xs">{s.sub}</p>
-            </div>
-          ))}
+        {/* Right — image box */}
+        <div className="lg:min-w-[40%] lg:py-0 py-6 lg:block hidden text-white text-3xl">
+          <div className="relative w-[80%] h-full bg-blue-500 mx-20 rounded-ss-[10%] rounded-se-[10%] rounded-ee-[30%] rounded-es-[10%]">
+            <img
+              src={ABOUT_IMG}
+              alt="About"
+              className="absolute -left-20 -top-5"
+              style={{ animation: 'cloud 4s ease-in-out infinite' }}
+            />
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
